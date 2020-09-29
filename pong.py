@@ -32,8 +32,8 @@ ball_vy = 1.0
 ball_size = 2
 
 #scoreboard
-player_score = 0
-computer_score = 0
+player_score = 4
+computer_score = 2
 
 #Initializes game variables and conditions
 def start():

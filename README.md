@@ -2,6 +2,7 @@
 
 This program is a simple pong game that plays in the console
 
+
 # Development Environment
 
 * Python 3.8.5
@@ -20,5 +21,10 @@ python pong.py
 
 ## Controls
 * Escape - Quit
-* Up Arrow Key - Move paddle up
-* Down Arrow Key - Move paddle down
+* W Key - Move Paddle Up
+* S Key - Move Paddle Down
+
+
+## Screenshot
+
+![Screenshot of console showing the game](screenshot.png)
