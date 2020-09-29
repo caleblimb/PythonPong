@@ -7,7 +7,7 @@ This program is a simple pong game that plays in the console
 * Python 3.8.5
 
 ## Packages
-* Install PyPi keyboard package using the console
+* Install [PyPi Keyboard Package](https://pypi.org/project/keyboard/) using the console
 ```
 pip install keyboard
 ```
