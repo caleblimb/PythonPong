@@ -8,8 +8,8 @@ import random
 import time
 
 running = False
-game_height = 30
-game_width = 100
+game_height = 25
+game_width = 50
 
 #size of paddles
 paddle_height = 3
@@ -26,8 +26,10 @@ ball_x = game_width / 2.0
 ball_y = game_height / 2.0
 
 #ball velocity
-ball_vx = random.uniform(0.5, 1.0)
-ball_vy = 0.5
+ball_vx = random.uniform(0.8, 1.0)
+ball_vy = 1.0
+
+ball_size = 2
 
 #scoreboard
 player_score = 0
@@ -46,7 +48,7 @@ def game_loop():
     global running
     while running == True:
         tick()
-        time.sleep(.05)
+        time.sleep(.1)
 
 #Updates game
 def tick():
@@ -75,9 +77,10 @@ def draw():
     global computer_pos
     global player_pos
     global paddle_height
+    global ball_size
 
     #"Clears" the console
-    print ('\n' * 10)
+    print ('\n' * 5)
     for y in range(0, game_height):
         screen_line = ''
         for x in range(0, game_width):
@@ -88,7 +91,7 @@ def draw():
             elif (x == paddle_gap and abs(y - int(player_pos)) < paddle_height) or (x == game_width - paddle_gap - 1 and abs(y - int(computer_pos)) < paddle_height):
                 screen_line += '#'
             #Add ball
-            elif (x == int(ball_x) and y == int(ball_y)):
+            elif (abs(x - ball_x) < ball_size and abs(y - int(ball_y)) < ball_size):
                 screen_line += 'O'
             #Fill empty space
             else:
@@ -111,30 +114,32 @@ def update_ball():
     global game_height
     global player_score
     global computer_score
+    global ball_size
 
     #update ball position
     ball_x += ball_vx
     ball_y += ball_vy
 
     #Check if ball collides with top or bottom
-    if ball_y < 2 or ball_y > game_height - 3:
+    if ball_y < ball_size + 1 or ball_y > game_height - 1 - ball_size:
         ball_vy *= -1
 
     #Check if ball collides with the players paddle
-    if ball_x < paddle_gap + 2 and ball_x > 2 and abs(ball_y - player_pos) < paddle_height:
+    if ball_x < paddle_gap + 2 and ball_x > paddle_gap + 1 and abs(ball_y - player_pos) < paddle_height + ball_size:
         ball_vx *= -1
 
     #Check if ball collides with the computers paddle
-    if ball_x > game_width - paddle_gap - 2 and ball_x < game_width - 2 and abs(ball_y - computer_pos) < paddle_height:
+    if ball_x > game_width - paddle_gap - 1 - ball_size and ball_x < game_width - paddle_gap - ball_size and abs(ball_y - computer_pos) < paddle_height + ball_size:
         ball_vx *= -1
 
     #Check if ball is out of bounds
-    if ball_x < 0:
+    if ball_x < 0 - ball_size:
         ball_x = game_width / 2
+        ball_vx = random.uniform(0.8, 1.0)
         computer_score += 1
-
-    if ball_x > game_width:
+    if ball_x > game_width + ball_size:
         ball_x = game_width / 2
+        ball_vx = random.uniform(-1.0, -0.8)
         player_score += 1
 
 def update_computer():
@@ -143,12 +148,12 @@ def update_computer():
     global ball_vx
     global computer_pos
 
-    if ball_vx > 0 and ball_x > game_width / 2:
+    if ball_vx > 0 and ball_x > game_width / 1.5:
         if ball_y < computer_pos:
-           computer_pos -= 1.0
+           computer_pos -= 0.5
 
         if ball_y > computer_pos:
-           computer_pos += 1.0
+           computer_pos += 0.5
 
 #Main method
 def main ():
