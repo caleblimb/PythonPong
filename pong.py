@@ -7,6 +7,8 @@ import keyboard
 import time
 
 running = False
+game_height = 30
+game_width = 100
 
 #Initializes game variables and conditions
 def start():
@@ -31,7 +33,22 @@ def tick():
 
 #Draws game to console
 def draw():
-    print ("\n" * 50)
+    global game_width
+    global game_height
+
+    #"Clears" the console
+    print ('\n' * 50)
+    for y in range(0, game_height):
+        screen_line = ''
+        for x in range(0, game_width):
+            #Add game border
+            if y == 0 or y == game_height - 1 or x == 0 or x == game_width - 1:
+                screen_line += '*'
+            else:
+                screen_line += ' '
+            if x == game_width - 1:
+                print (screen_line)
+
     print ("Press Escape to Quit")
 
 #Main method
