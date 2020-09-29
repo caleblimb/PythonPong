@@ -8,23 +8,33 @@ import time
 
 running = False
 
+#Initializes game variables and conditions
 def start():
     global running
     running = True
     game_loop()
 
+#Basic game loop
 def game_loop():
     global running
     while running == True:
         tick()
-        time.sleep(.03)
+        time.sleep(.05)
 
+#Updates game
 def tick():
     global running
-    print("tick")
+    #Check for Escape key to Quit
     if keyboard.is_pressed(chr(27)):
         running = False
+    draw()
 
+#Draws game to console
+def draw():
+    print ("\n" * 50)
+    print ("Press Escape to Quit")
+
+#Main method
 def main ():
     start()
 
