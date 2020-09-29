@@ -100,10 +100,10 @@ def update_ball():
     if ball_y < 2 or ball_y > game_height - 3:
         ball_vy *= -1
 
-    if ball_x < paddle_gap + 2 and abs(ball_y - player_pos) < paddle_height:
+    if ball_x < paddle_gap + 2 and ball_x > 2 and abs(ball_y - player_pos) < paddle_height:
         ball_vx *= -1
 
-    if ball_x > game_width - paddle_gap - 2 and abs(ball_y - computer_pos) < paddle_height:
+    if ball_x > game_width - paddle_gap - 2 and ball_x < game_width - 2 and abs(ball_y - computer_pos) < paddle_height:
         ball_vx *= -1
 
 def update_computer():
