@@ -50,6 +50,7 @@ def tick():
     if keyboard.is_pressed(chr(115)):
         player_pos += 1.0
 
+    update_computer()
     update_ball()
     draw()
 
@@ -104,6 +105,16 @@ def update_ball():
 
     if ball_x > game_width - paddle_gap - 2 and abs(ball_y - computer_pos) < paddle_height:
         ball_vx *= -1
+
+def update_computer():
+    global ball_y
+    global computer_pos
+
+    if ball_y < computer_pos:
+        computer_pos -= 0.9
+
+    if ball_y > computer_pos:
+        computer_pos += 0.9
 
 #Main method
 def main ():
