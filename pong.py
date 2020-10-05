@@ -80,7 +80,9 @@ def draw():
     global ball_size
 
     #"Clears" the console
-    print ('\n' * 5)
+    frame = ''
+    frame += ('\n' * 5)
+
     for y in range(0, game_height):
         screen_line = ''
         for x in range(0, game_width):
@@ -98,11 +100,12 @@ def draw():
                 screen_line += ' '
             #Draw scren_line
             if x == game_width - 1:
-                print (screen_line)
+                frame += (screen_line + '\n')
 
-    print ("Score: " + str(player_score) + " | " + str(computer_score))
-    print ("W and S to move")
-    print ("Press Escape to Quit")
+    frame += ("Score: " + str(player_score) + " | " + str(computer_score)) + '\n'
+    frame +=  ("W and S to move") + '\n'
+    frame += ("Press Escape to Quit") + '\n'
+    print (frame)
 
 def update_ball():
     global ball_x
